@@ -1,0 +1,1487 @@
+<title>B2BPraxis — Live Session Demo</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #07090E;
+    --surface: #0C1018;
+    --surface2: #111620;
+    --border: #1C2333;
+    --border-bright: #2A3347;
+    --accent: #FF6427;
+    --accent-dim: rgba(255, 100, 39, 0.12);
+    --accent-dim2: rgba(255, 100, 39, 0.06);
+    --user: #38BDF8;
+    --user-dim: rgba(56, 189, 248, 0.1);
+    --green: #22C55E;
+    --green-dim: rgba(34, 197, 94, 0.1);
+    --red: #EF4444;
+    --red-dim: rgba(239, 68, 68, 0.1);
+    --yellow: #F59E0B;
+    --text: #E8EDF5;
+    --text2: #8896B3;
+    --text3: #4F5E7A;
+    --mono: 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #F4F6FA;
+      --surface: #FFFFFF;
+      --surface2: #F0F3F8;
+      --border: #DDE3EE;
+      --border-bright: #C8D2E4;
+      --accent: #E8520E;
+      --accent-dim: rgba(232, 82, 14, 0.08);
+      --accent-dim2: rgba(232, 82, 14, 0.04);
+      --user: #0284C7;
+      --user-dim: rgba(2, 132, 199, 0.08);
+      --green: #16A34A;
+      --green-dim: rgba(22, 163, 74, 0.08);
+      --red: #DC2626;
+      --red-dim: rgba(220, 38, 38, 0.08);
+      --yellow: #D97706;
+      --text: #0F172A;
+      --text2: #475569;
+      --text3: #94A3B8;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #07090E; --surface: #0C1018; --surface2: #111620;
+    --border: #1C2333; --border-bright: #2A3347;
+    --accent: #FF6427; --accent-dim: rgba(255,100,39,.12); --accent-dim2: rgba(255,100,39,.06);
+    --user: #38BDF8; --user-dim: rgba(56,189,248,.1);
+    --green: #22C55E; --green-dim: rgba(34,197,94,.1);
+    --red: #EF4444; --red-dim: rgba(239,68,68,.1);
+    --yellow: #F59E0B;
+    --text: #E8EDF5; --text2: #8896B3; --text3: #4F5E7A;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F4F6FA; --surface: #FFFFFF; --surface2: #F0F3F8;
+    --border: #DDE3EE; --border-bright: #C8D2E4;
+    --accent: #E8520E; --accent-dim: rgba(232,82,14,.08); --accent-dim2: rgba(232,82,14,.04);
+    --user: #0284C7; --user-dim: rgba(2,132,199,.08);
+    --green: #16A34A; --green-dim: rgba(22,163,74,.08);
+    --red: #DC2626; --red-dim: rgba(220,38,38,.08);
+    --yellow: #D97706;
+    --text: #0F172A; --text2: #475569; --text3: #94A3B8;
+  }
+
+  html { font-size: 15px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    gap: 16px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0;
+    font-family: var(--mono);
+  }
+
+  .session-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text2);
+    font-family: var(--mono);
+  }
+
+  .meta-item .label { color: var(--text3); }
+
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .phase-bar {
+    display: flex;
+    align-items: stretch;
+    height: 32px;
+    border-top: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .phase-bar::-webkit-scrollbar { display: none; }
+
+  .phase {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text3);
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .phase.active {
+    color: var(--accent);
+    background: var(--accent-dim2);
+  }
+
+  .phase.done { color: var(--green); }
+
+  .phase-num {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    opacity: 0.6;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 28px;
+  }
+
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+
+  .section-label.highlight { color: var(--accent); }
+
+  /* ── FEED ── */
+  .feed { display: flex; flex-direction: column; gap: 16px; }
+
+  /* ── CARDS ── */
+  .card {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .card.visible { opacity: 1; transform: translateY(0); }
+
+  .card.claude {
+    border-left: 3px solid var(--accent);
+    padding: 16px 18px;
+  }
+
+  .card.user {
+    border-left: 3px solid var(--user);
+    padding: 14px 18px;
+    background: var(--user-dim);
+  }
+
+  .card-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: var(--mono);
+  }
+
+  .card.claude .card-label { color: var(--accent); }
+  .card.user .card-label { color: var(--user); }
+
+  .card p { font-size: 0.875rem; color: var(--text); line-height: 1.65; }
+  .card p + p { margin-top: 8px; }
+
+  /* ── Q&A GRID ── */
+  .qa-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 4px;
+  }
+
+  .qa-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .qa-row:last-child { border-bottom: none; }
+
+  .qa-q {
+    padding: 10px 14px;
+    font-size: 0.75rem;
+    color: var(--text2);
+    border-right: 1px solid var(--border);
+    font-weight: 500;
+    background: var(--surface2);
+    line-height: 1.5;
+  }
+
+  .qa-a {
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ── STRESS TEST ── */
+  .test-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .test-item {
+    display: grid;
+    grid-template-columns: 22px 140px 1fr;
+    align-items: start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+
+  .test-item:last-child { border-bottom: none; }
+
+  .test-icon { font-size: 0.9rem; line-height: 1.4; }
+  .test-name { color: var(--text2); font-weight: 500; }
+  .test-verdict { color: var(--text); }
+
+  .verdict-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--green-dim);
+    border: 1px solid var(--green);
+    margin-top: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--green);
+    font-family: var(--mono);
+  }
+
+  /* ── BLUEPRINT DOCUMENT ── */
+  .blueprint-doc {
+    border: 1px solid var(--border-bright);
+    background: var(--surface);
+    margin: 4px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blueprint-doc::before {
+    content: 'BLUEPRINT';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-family: var(--mono);
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.025;
+    letter-spacing: 0.2em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .bp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 2px solid var(--accent);
+    background: var(--accent-dim2);
+  }
+
+  .bp-title-block {}
+
+  .bp-eyebrow {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: var(--mono);
+    margin-bottom: 2px;
+  }
+
+  .bp-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .bp-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bp-meta-item {
+    font-size: 0.65rem;
+    color: var(--text3);
+    font-family: var(--mono);
+    line-height: 1.6;
+  }
+
+  .bp-body { padding: 0; }
+
+  .bp-section {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bp-section:last-child { border-bottom: none; }
+
+  .bp-section-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: var(--mono);
+    margin-bottom: 8px;
+  }
+
+  .bp-section p {
+    font-size: 0.8rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .bp-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .bp-step {
+    display: flex;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .bp-step-num {
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+    font-family: var(--mono);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .proof-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 2px;
+  }
+
+  .proof-cell {
+    background: var(--surface2);
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+  }
+
+  .proof-cell-label {
+    font-size: 0.6rem;
+    color: var(--text3);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  .proof-cell-value {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--green);
+    font-family: var(--mono);
+  }
+
+  .proof-cell-sub {
+    font-size: 0.7rem;
+    color: var(--text2);
+    margin-top: 2px;
+  }
+
+  .faster-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .faster-row {
+    display: flex;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: var(--text);
+    padding: 5px 8px;
+    background: var(--accent-dim2);
+    border-left: 2px solid var(--accent);
+  }
+
+  .faster-arrow {
+    color: var(--accent);
+    font-family: var(--mono);
+    flex-shrink: 0;
+  }
+
+  .bp-cta {
+    background: var(--accent);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .bp-cta-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .bp-cta-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 5px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+
+  /* ── EMAIL CARD ── */
+  .email-frame {
+    border: 1px solid var(--border-bright);
+    background: var(--surface);
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .email-header {
+    background: var(--surface2);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .email-meta-row {
+    display: flex;
+    gap: 8px;
+    font-size: 0.75rem;
+    margin-bottom: 3px;
+    color: var(--text);
+  }
+
+  .email-meta-label {
+    color: var(--text3);
+    font-family: var(--mono);
+    width: 52px;
+    flex-shrink: 0;
+  }
+
+  .email-subject-options {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 8px;
+  }
+
+  .subject-option {
+    display: flex;
+    gap: 8px;
+    font-size: 0.75rem;
+  }
+
+  .subject-tag {
+    background: var(--accent-dim);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    font-weight: 700;
+    flex-shrink: 0;
+    height: fit-content;
+    margin-top: 1px;
+  }
+
+  .email-body {
+    padding: 16px;
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .email-highlight {
+    background: var(--accent-dim);
+    border-left: 2px solid var(--accent);
+    padding: 2px 6px;
+    display: inline;
+    font-weight: 500;
+  }
+
+  .email-footer {
+    border-top: 1px solid var(--border);
+    padding: 8px 16px;
+    display: flex;
+    gap: 20px;
+    font-size: 0.7rem;
+    color: var(--text3);
+    font-family: var(--mono);
+    background: var(--surface2);
+  }
+
+  /* ── LINKEDIN POST ── */
+  .linkedin-frame {
+    border: 1px solid var(--border-bright);
+    background: var(--surface);
+    margin-top: 4px;
+    overflow: hidden;
+  }
+
+  .li-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .li-avatar {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .li-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+  .li-role { font-size: 0.7rem; color: var(--text2); }
+
+  .li-tag {
+    margin-left: auto;
+    font-size: 0.6rem;
+    font-family: var(--mono);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 3px 7px;
+    text-transform: uppercase;
+  }
+
+  .li-body {
+    padding: 14px 14px 12px;
+    font-size: 0.8rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .li-trigger {
+    display: inline-block;
+    background: var(--accent-dim);
+    color: var(--accent);
+    font-weight: 700;
+    padding: 0 4px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .li-engage {
+    display: flex;
+    gap: 16px;
+    padding: 8px 14px;
+    border-top: 1px solid var(--border);
+    font-size: 0.7rem;
+    color: var(--text3);
+    background: var(--surface2);
+    font-family: var(--mono);
+  }
+
+  .li-comment-note {
+    padding: 8px 14px;
+    background: var(--green-dim);
+    border-top: 1px solid var(--green);
+    font-size: 0.7rem;
+    color: var(--green);
+    font-family: var(--mono);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── ROADMAP ── */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .rw-week {
+    padding: 10px 12px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .rw-week:last-child { border-bottom: none; }
+
+  .rw-week-num {
+    font-size: 0.65rem;
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  .rw-week-label {
+    font-size: 0.7rem;
+    color: var(--text2);
+    font-weight: 500;
+    margin-top: 1px;
+    line-height: 1.3;
+  }
+
+  .rw-content {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rw-content:last-child { border-bottom: none; }
+
+  .rw-goal {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .rw-items {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .rw-item {
+    display: flex;
+    gap: 7px;
+    font-size: 0.72rem;
+    color: var(--text2);
+    line-height: 1.4;
+  }
+
+  .rw-check {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--border-bright);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .rw-item.highlight .rw-item-text { color: var(--accent); font-weight: 500; }
+
+  .roadmap-more {
+    padding: 12px 14px;
+    font-size: 0.75rem;
+    color: var(--text3);
+    font-family: var(--mono);
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── FILE LOG ── */
+  .file-log {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+    margin-top: 4px;
+  }
+
+  .file-log-title {
+    font-size: 0.65rem;
+    font-family: var(--mono);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.75rem;
+    font-family: var(--mono);
+  }
+
+  .file-item:last-child { border-bottom: none; }
+
+  .file-dot {
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .file-path { color: var(--accent); }
+  .file-desc { color: var(--text2); font-size: 0.7rem; margin-left: auto; }
+
+  /* ── METRICS ROW ── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 4px;
+  }
+
+  .metric-cell {
+    background: var(--surface);
+    padding: 12px 14px;
+  }
+
+  .metric-label {
+    font-size: 0.6rem;
+    font-family: var(--mono);
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  .metric-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--mono);
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .metric-value.green { color: var(--green); }
+  .metric-value.orange { color: var(--accent); }
+
+  .metric-sub {
+    font-size: 0.65rem;
+    color: var(--text3);
+    font-family: var(--mono);
+    margin-top: 3px;
+  }
+
+  /* ── SESSION START ── */
+  .session-start {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 0.7rem;
+    color: var(--text3);
+    font-family: var(--mono);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .session-start.visible { opacity: 1; }
+
+  .session-start::before, .session-start::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── SMALL UTILS ── */
+  .mono { font-family: var(--mono); }
+  .accent { color: var(--accent); }
+  .green { color: var(--green); }
+  .dim { color: var(--text2); }
+
+  strong { font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .phase-bar { display: none; }
+    .session-meta { gap: 10px; }
+    .meta-item:nth-child(n+3) { display: none; }
+    .qa-row { grid-template-columns: 1fr; }
+    .qa-q { border-right: none; border-bottom: 1px solid var(--border); }
+    .proof-row { grid-template-columns: 1fr; }
+    .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-grid { grid-template-columns: 80px 1fr; }
+    .test-item { grid-template-columns: 22px 1fr; }
+    .test-verdict { display: none; }
+  }
+</style>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-mark">B2B</div>
+      b2bpraxis
+    </div>
+    <div class="session-meta">
+      <div class="meta-item">
+        <div class="live-dot"></div>
+        <span class="label">STATUS</span>&nbsp;LIVE SESSION
+      </div>
+      <div class="meta-item">
+        <span class="label">CO</span>&nbsp;Convrt
+      </div>
+      <div class="meta-item">
+        <span class="label">FOUNDER</span>&nbsp;Marcus Reid
+      </div>
+    </div>
+  </div>
+  <div class="phase-bar">
+    <div class="phase done"><span class="phase-num">01</span> Interview</div>
+    <div class="phase done"><span class="phase-num">02</span> Blueprint</div>
+    <div class="phase active"><span class="phase-num">03</span> Outreach</div>
+    <div class="phase"><span class="phase-num">04</span> Content</div>
+    <div class="phase"><span class="phase-num">05</span> Website</div>
+    <div class="phase"><span class="phase-num">06</span> Roadmap</div>
+    <div class="phase"><span class="phase-num">07</span> Launch</div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SESSION OPEN -->
+  <div class="session-start card" style="border:none; background: none; padding: 0 0 8px;">
+    <span>SESSION OPENED · FLOW A DETECTED · NO EXISTING FILES · 2026-07-08</span>
+  </div>
+
+  <!-- DETECTION -->
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">b2bpraxis</div>
+      <p><strong>FLOW A — New operation.</strong> No <span class="mono accent">GTM.md</span> or <span class="mono accent">PIPELINE_TRACKER.md</span> found. Starting from zero.</p>
+      <p style="margin-top:8px;">I'll ask 9 questions to lock your ICP, stress-test your positioning, then build your Blueprint — the core asset that powers your cold outreach, LinkedIn content, and website lead magnet. Everything else is distribution.</p>
+    </div>
+
+    <div class="card user">
+      <div class="card-label">Marcus Reid · Convrt</div>
+      <p>Let's go. We help B2B SaaS companies improve trial-to-paid conversion. Most of our clients have PLG motions and are stuck around 10–15% conversion. We get them to 25–35% in 60–90 days using behavioral onboarding sequences and in-app triggers. Average deal is $4,500/month retainer, 12-month commitments. Target ICP is SaaS companies $1M–$8M ARR, product-led, 2+ person growth team. We've done this for 6 companies so far. Best result: a project management tool went from 12% to 31% trial-to-paid in 58 days — $340K additional ARR. Goal: $45K MRR in 90 days. Channels: cold email, LinkedIn, and we want to start creating content. No YouTube yet, that's out of scope for now.</p>
+    </div>
+
+  </div>
+
+  <!-- SECTION: INTERVIEW -->
+  <div class="section-divider">
+    <div class="section-label">Clarity Interview</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">9-Question Intake — Complete</div>
+      <div class="qa-grid" style="margin-top:0;">
+        <div class="qa-row">
+          <div class="qa-q">Core outcome delivered</div>
+          <div class="qa-a">Trial-to-paid conversion improvement — from ~12% to 25–35% in 60–90 days</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">ICP</div>
+          <div class="qa-a">B2B SaaS · $1M–$8M ARR · product-led growth · 2+ person growth team · buyer: Head of Growth or VP Product</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Single strongest result</div>
+          <div class="qa-a">12% → 31% trial-to-paid in 58 days · +$340K ARR · project management SaaS</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Deal size / cycle</div>
+          <div class="qa-a">$4,500/month · 12-month retainer · 2–3 week sales cycle</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Current lead gen</div>
+          <div class="qa-a">Mostly warm intros from founders network — no systematic outbound yet</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Channels</div>
+          <div class="qa-a">Cold email + LinkedIn + Content (LinkedIn posts, Reddit) — YouTube out of scope v1</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Website</div>
+          <div class="qa-a">Basic landing page exists — no lead magnet, no opt-in, just a contact form</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">90-day revenue target</div>
+          <div class="qa-a">$45K MRR (10 clients at $4,500/month)</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Out of scope</div>
+          <div class="qa-a">YouTube, paid ads, enterprise motion (100+ employee companies)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: ICP STRESS TEST -->
+  <div class="section-divider">
+    <div class="section-label highlight">ICP Stress Test</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">Running 5 Tests</div>
+      <div class="test-list">
+        <div class="test-item">
+          <div class="test-icon">✅</div>
+          <div class="test-name">Pain test</div>
+          <div class="test-verdict">Trial-to-paid is actively measured and funded at every PLG SaaS — they're already spending on tools to fix it</div>
+        </div>
+        <div class="test-item">
+          <div class="test-icon">✅</div>
+          <div class="test-name">Specificity test</div>
+          <div class="test-verdict">$1M–$8M ARR + product-led + 2+ person growth team — 2 reps would target the same companies</div>
+        </div>
+        <div class="test-item">
+          <div class="test-icon">✅</div>
+          <div class="test-name">Proof test</div>
+          <div class="test-verdict">12% → 31% in 58 days with $340K ARR impact. One client with a number — enough to lead with</div>
+        </div>
+        <div class="test-item">
+          <div class="test-icon">✅</div>
+          <div class="test-name">Blueprint test</div>
+          <div class="test-verdict">The workflow is specific enough to document: behavioral event mapping → segment triggers → sequence design → test cadence</div>
+        </div>
+        <div class="test-item">
+          <div class="test-icon">⚠️</div>
+          <div class="test-name">"Why you" test</div>
+          <div class="test-verdict">Differentiator needs sharpening: "behavioral sequences" alone isn't unique. Lock on: in-app trigger methodology + 58-day guarantee</div>
+        </div>
+      </div>
+      <div class="verdict-banner">
+        ✅ STRONG — proceed with one fix: add "58-day timeline" and "in-app trigger methodology" to all positioning before building sequences
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: BLUEPRINT -->
+  <div class="section-divider">
+    <div class="section-label highlight">Blueprint — Core Asset</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">Building Blueprint First</div>
+      <p>This document powers your cold outreach CTA, your LinkedIn lead magnet posts, and your website opt-in. Every sequence and post we write will distribute it. Building now.</p>
+    </div>
+
+    <div class="card claude" style="padding: 0; overflow: hidden;">
+      <div class="blueprint-doc">
+        <div class="bp-header">
+          <div class="bp-title-block">
+            <div class="bp-eyebrow">outputs/blueprint.md · Convrt</div>
+            <div class="bp-title">The Trial-to-Paid Blueprint:<br>How to take a PLG SaaS from 12% to 30%+ conversion in 60 days</div>
+          </div>
+          <div class="bp-meta">
+            <div class="bp-meta-item">Version 1 · July 2026</div>
+            <div class="bp-meta-item">For: Head of Growth, VP Product</div>
+            <div class="bp-meta-item">convrt.io</div>
+          </div>
+        </div>
+
+        <div class="bp-body">
+          <div class="bp-section">
+            <div class="bp-section-label">01 — The Problem</div>
+            <p>Most PLG SaaS companies lose 85–90% of trial users before they ever see value. The product is good. The problem is that free-to-paid conversion is treated as a product problem, when it's actually a sequencing and timing problem. Users churn because the right message never reached them at the right moment — not because the product failed them.</p>
+          </div>
+
+          <div class="bp-section">
+            <div class="bp-section-label">02 — The Manual Workflow</div>
+            <p style="margin-bottom:8px;">Here's how to improve trial-to-paid conversion without any additional tooling:</p>
+            <div class="bp-steps">
+              <div class="bp-step">
+                <div class="bp-step-num">1</div>
+                <div>Map your 3 key activation events — the in-app actions that correlate with users who convert. (Usually: first core action, first collaboration/share, first integration connected)</div>
+              </div>
+              <div class="bp-step">
+                <div class="bp-step-num">2</div>
+                <div>Segment trial users by which activation event they've hit. Users who hit 0 events need urgency. Users who hit 1–2 need the next step shown clearly. Users who hit all 3 need a conversion ask.</div>
+              </div>
+              <div class="bp-step">
+                <div class="bp-step-num">3</div>
+                <div>Build 3 email sequences matched to each segment. Day 1: what they haven't done yet. Day 4: social proof from someone like them. Day 8: direct ask with a specific reason to upgrade now.</div>
+              </div>
+              <div class="bp-step">
+                <div class="bp-step-num">4</div>
+                <div>Add one in-app trigger per segment: a contextual prompt shown when a user attempts a premium action — not a paywall, a value frame ("You're 1 step from [outcome] — upgrade to unlock").</div>
+              </div>
+              <div class="bp-step">
+                <div class="bp-step-num">5</div>
+                <div>Run for 30 days. Measure trial-to-paid rate per segment. Kill the lowest-converting sequence. Double the send volume on the winner.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bp-section">
+            <div class="bp-section-label">03 — The Proof</div>
+            <div class="proof-row">
+              <div class="proof-cell">
+                <div class="proof-cell-label">Before</div>
+                <div class="proof-cell-value">12%</div>
+                <div class="proof-cell-sub">trial-to-paid · project mgmt SaaS</div>
+              </div>
+              <div class="proof-cell">
+                <div class="proof-cell-label">After · 58 days</div>
+                <div class="proof-cell-value">31%</div>
+                <div class="proof-cell-sub">+$340K ARR · same trial volume</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bp-section">
+            <div class="bp-section-label">04 — How to Make This 10× Faster</div>
+            <p style="margin-bottom:8px;">The manual process above takes 4–6 weeks to instrument and test. Here's where Convrt compresses it:</p>
+            <div class="faster-list">
+              <div class="faster-row">
+                <div class="faster-arrow">→</div>
+                <div>We identify your 3 activation events in week 1 using your existing analytics data — no new instrumentation needed</div>
+              </div>
+              <div class="faster-row">
+                <div class="faster-arrow">→</div>
+                <div>Pre-built segment templates for PLG SaaS — your sequences are live in 5 days, not 5 weeks</div>
+              </div>
+              <div class="faster-row">
+                <div class="faster-arrow">→</div>
+                <div>In-app triggers written and QA'd by us — your eng team installs one snippet, nothing else</div>
+              </div>
+              <div class="faster-row">
+                <div class="faster-arrow">→</div>
+                <div>Weekly optimization calls: we read the data, you approve the changes. No analyst hire needed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bp-cta">
+          <div class="bp-cta-text">Ready to run this for your product? Reply YES and we'll map your activation events this week.</div>
+          <button class="bp-cta-btn">convrt.io/start</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: OUTREACH -->
+  <div class="section-divider">
+    <div class="section-label">Cold Email · Blueprint Method</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">Email Sequence — 4 Emails · Blueprint First</div>
+      <p>Email 1 never asks for a demo. It offers the Blueprint. The demo ask lives inside the Blueprint, after they've already seen the value. Here's Email 1:</p>
+    </div>
+
+    <div class="card claude" style="padding: 0; overflow: hidden;">
+      <div class="email-frame">
+        <div class="email-header">
+          <div class="email-meta-row"><span class="email-meta-label">FROM</span>marcus@convrt.io</div>
+          <div class="email-meta-row"><span class="email-meta-label">TO</span>[Head of Growth] · [Company]</div>
+          <div class="email-meta-row"><span class="email-meta-label">DAY</span><span class="mono accent">1 of 4</span></div>
+          <div class="email-subject-options">
+            <div class="subject-option">
+              <span class="subject-tag">A</span>
+              <span>How [company type] went from 12% to 31% trial-to-paid in 58 days</span>
+            </div>
+            <div class="subject-option">
+              <span class="subject-tag">B</span>
+              <span>[First name] — the onboarding sequence that added $340K ARR</span>
+            </div>
+            <div class="subject-option">
+              <span class="subject-tag">C</span>
+              <span>Quick question about your trial conversion rate</span>
+            </div>
+          </div>
+        </div>
+        <div class="email-body">
+          <p>Hi [Name],</p>
+          <br>
+          <p>Noticed [Company] is product-led — [one thing that shows you know their product, e.g. "saw you recently added the team collaboration feature"]. That usually means trial conversion is something you're actively tracking.</p>
+          <br>
+          <p>We helped a project management SaaS go from <span class="email-highlight">12% → 31% trial-to-paid in 58 days</span> using behavioral onboarding sequences tied to their activation events — not generic drip emails.</p>
+          <br>
+          <p>I put together the exact workflow we used — the activation event mapping, segment structure, sequence timing, and in-app trigger copy. Happy to send it over.</p>
+          <br>
+          <p>Want it? Just reply <strong>YES</strong> and I'll send it straight to this thread.</p>
+          <br>
+          <p>Marcus<br><span class="dim" style="font-size:0.8em;">Convrt · convrt.io</span></p>
+        </div>
+        <div class="email-footer">
+          <span class="accent">↳ BLUEPRINT OFFER</span>
+          <span>no demo ask in email 1</span>
+          <span>reply YES → send blueprint → CTA inside blueprint</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card claude">
+      <div class="card-label">Emails 2–4 Generated</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:4px;">
+        <div style="padding:10px; background:var(--surface2); border:1px solid var(--border); font-size:0.75rem;">
+          <div style="color:var(--accent); font-family:var(--mono); font-size:0.6rem; margin-bottom:4px;">DAY 3</div>
+          <div style="color:var(--text2);">Different angle. "The part most growth teams miss is step 2 — segmenting by activation event, not by trial day." Shorter. References email 1.</div>
+        </div>
+        <div style="padding:10px; background:var(--surface2); border:1px solid var(--border); font-size:0.75rem;">
+          <div style="color:var(--accent); font-family:var(--mono); font-size:0.6rem; margin-bottom:4px;">DAY 7</div>
+          <div style="color:var(--text2);">Value add: "the in-app trigger copy that converts best" — 3 examples from client work. Blueprint offer repeated.</div>
+        </div>
+        <div style="padding:10px; background:var(--surface2); border:1px solid var(--border); font-size:0.75rem;">
+          <div style="color:var(--accent); font-family:var(--mono); font-size:0.6rem; margin-bottom:4px;">DAY 14</div>
+          <div style="color:var(--text2);">Break-up. "Closing the loop — if trial conversion becomes a priority, the workflow doc is there whenever." No CTA.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: CONTENT -->
+  <div class="section-divider">
+    <div class="section-label">LinkedIn · Lead Magnet Post</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">Content Engine — Blueprint Distribution</div>
+      <p>6 of 7 weekly LinkedIn posts are lead magnet content — excerpts and angles from the Blueprint. Every post ends with a comment trigger that auto-DMs the Blueprint. Here's Post Format #1 (Workflow):</p>
+    </div>
+
+    <div class="card claude" style="padding: 0; overflow: hidden;">
+      <div class="linkedin-frame">
+        <div class="li-header">
+          <div class="li-avatar">MR</div>
+          <div>
+            <div class="li-name">Marcus Reid</div>
+            <div class="li-role">Founder at Convrt · Trial-to-paid conversion for PLG SaaS</div>
+          </div>
+          <div class="li-tag">Lead Magnet Format</div>
+        </div>
+        <div class="li-body">
+          <p>Most PLG SaaS companies treat trial-to-paid as a product problem.</p>
+          <br>
+          <p>It's not. It's a sequencing problem.</p>
+          <br>
+          <p>Here's the exact workflow we used to take one product from 12% → 31% conversion in 58 days:</p>
+          <br>
+          <p>→ Map 3 activation events (not trial days — actual in-app actions)<br>
+          → Build 3 segments by how many activation events they've hit<br>
+          → Write sequences matched to where each user is stuck<br>
+          → Add one in-app trigger per segment (value frame, not paywall)<br>
+          → Run 30 days, kill the loser, double the winner</p>
+          <br>
+          <p>That's the manual version. It's not complicated. Most teams just never do it because there's no one driving it.</p>
+          <br>
+          <p>I wrote up the full breakdown — the activation events we used, the exact email timing, the in-app trigger copy that converts best.</p>
+          <br>
+          <p>Comment <span class="li-trigger">BLUEPRINT</span> and I'll send it straight to your DMs.</p>
+        </div>
+        <div class="li-engage">
+          <span>👍 Like</span>
+          <span>💬 Comment</span>
+          <span>↗ Repost</span>
+          <span style="margin-left:auto; color:var(--text3);">targeting: Head of Growth · VP Product · PLG SaaS founders</span>
+        </div>
+        <div class="li-comment-note">
+          ⚡ Auto-DM active — any comment containing "BLUEPRINT" triggers Blueprint delivery via DM
+        </div>
+      </div>
+    </div>
+
+    <div class="card claude">
+      <div class="card-label">Weekly Content Plan</div>
+      <div style="display:grid; grid-template-columns:40px 1fr; gap:0; border:1px solid var(--border); overflow:hidden; margin-top:4px;">
+        <div style="padding:7px 8px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-family:var(--mono); font-weight:700; color:#fff; writing-mode:vertical-lr; text-orientation:mixed; letter-spacing:0.1em; border-bottom:1px solid rgba(255,255,255,0.2);">MON</div>
+        <div style="padding:7px 12px; border-bottom:1px solid var(--border); font-size:0.78rem; color:var(--text2);"><strong style="color:var(--text);">Workflow post</strong> — excerpt from Blueprint step-by-step · Comment BLUEPRINT</div>
+        <div style="padding:7px 8px; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-family:var(--mono); font-weight:700; color:var(--accent); writing-mode:vertical-lr; border-bottom:1px solid var(--border);">TUE</div>
+        <div style="padding:7px 12px; border-bottom:1px solid var(--border); font-size:0.78rem; color:var(--text2);"><strong style="color:var(--text);">Proof post</strong> — 12% → 31% story · timeline · what changed · Comment BLUEPRINT</div>
+        <div style="padding:7px 8px; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-family:var(--mono); font-weight:700; color:var(--accent); writing-mode:vertical-lr; border-bottom:1px solid var(--border);">WED</div>
+        <div style="padding:7px 12px; border-bottom:1px solid var(--border); font-size:0.78rem; color:var(--text2);"><strong style="color:var(--text);">Contrarian</strong> — "Trial conversion is not a product problem" · argument + evidence</div>
+        <div style="padding:7px 8px; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-family:var(--mono); font-weight:700; color:var(--accent); writing-mode:vertical-lr; border-bottom:1px solid var(--border);">THU</div>
+        <div style="padding:7px 12px; border-bottom:1px solid var(--border); font-size:0.78rem; color:var(--text2);"><strong style="color:var(--text);">In-app trigger copy</strong> — 3 examples that convert · what makes them work</div>
+        <div style="padding:7px 8px; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-family:var(--mono); font-weight:700; color:var(--accent); writing-mode:vertical-lr; border-bottom:1px solid var(--border);">FRI</div>
+        <div style="padding:7px 12px; border-bottom:1px solid var(--border); font-size:0.78rem; color:var(--text2);"><strong style="color:var(--text);">Before/After</strong> — specific segment, specific sequence, specific result · Comment BLUEPRINT</div>
+        <div style="padding:7px 8px; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-family:var(--mono); font-weight:700; color:var(--text3); writing-mode:vertical-lr; border-bottom:1px solid var(--border);">SAT</div>
+        <div style="padding:7px 12px; border-bottom:1px solid var(--border); font-size:0.78rem; color:var(--text2);"><strong style="color:var(--text);">Question</strong> — "What's your current trial-to-paid rate?" — engagement + ICP signal</div>
+        <div style="padding:7px 8px; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-family:var(--mono); font-weight:700; color:var(--text3); writing-mode:vertical-lr;">SUN</div>
+        <div style="padding:7px 12px; font-size:0.78rem; color:var(--text2);"><strong style="color:var(--text);">Founder day</strong> — what we shipped / what we learned / what's not working · build-in-public</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: WEBSITE -->
+  <div class="section-divider">
+    <div class="section-label">Website Lead Magnet Page</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">Lead Magnet Page Brief · outputs/website/lead-magnet-page.md</div>
+      <div style="display:grid; grid-template-columns:130px 1fr; gap:0; border:1px solid var(--border); margin-top:4px;">
+        <div style="padding:9px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-right:1px solid var(--border); font-size:0.72rem; color:var(--text2); font-weight:500;">URL</div>
+        <div style="padding:9px 12px; border-bottom:1px solid var(--border); font-size:0.75rem; font-family:var(--mono); color:var(--accent);">convrt.io/blueprint</div>
+        <div style="padding:9px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-right:1px solid var(--border); font-size:0.72rem; color:var(--text2); font-weight:500;">Headline</div>
+        <div style="padding:9px 12px; border-bottom:1px solid var(--border); font-size:0.8rem; color:var(--text);">"The Trial-to-Paid Blueprint: How to get from 12% to 30%+ conversion without a new hire or paid ads"</div>
+        <div style="padding:9px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-right:1px solid var(--border); font-size:0.72rem; color:var(--text2); font-weight:500;">Sub</div>
+        <div style="padding:9px 12px; border-bottom:1px solid var(--border); font-size:0.8rem; color:var(--text);">The exact workflow that added $340K ARR for one PLG SaaS in 58 days — free</div>
+        <div style="padding:9px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-right:1px solid var(--border); font-size:0.72rem; color:var(--text2); font-weight:500;">CTA</div>
+        <div style="padding:9px 12px; border-bottom:1px solid var(--border); font-size:0.8rem; color:var(--text);">[Email] → "Send me the Blueprint" · No paywall — Blueprint in cold email is ungated</div>
+        <div style="padding:9px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-right:1px solid var(--border); font-size:0.72rem; color:var(--text2); font-weight:500;">After opt-in</div>
+        <div style="padding:9px 12px; border-bottom:1px solid var(--border); font-size:0.8rem; color:var(--text);">Day 0: Blueprint · Day 3: "Did it help?" · Day 7: Case study deep-dive · Day 14: "Want us to run this for you?"</div>
+        <div style="padding:9px 12px; background:var(--surface2); border-right:1px solid var(--border); font-size:0.72rem; color:var(--text2); font-weight:500;">Traffic sources</div>
+        <div style="padding:9px 12px; font-size:0.8rem; color:var(--text);">LinkedIn comment DMs → this page · Cold email (Blueprint sent directly, no gate) · Reddit posts UTM-linked</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: ROADMAP -->
+  <div class="section-divider">
+    <div class="section-label highlight">12-Week Roadmap</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">Revenue Math First</div>
+      <div class="metrics-row" style="margin-top:4px;">
+        <div class="metric-cell">
+          <div class="metric-label">90-Day Target</div>
+          <div class="metric-value orange">$45K</div>
+          <div class="metric-sub">MRR</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Clients Needed</div>
+          <div class="metric-value">10</div>
+          <div class="metric-sub">at $4,500/mo</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Meetings Needed</div>
+          <div class="metric-value">40</div>
+          <div class="metric-sub">at 25% close rate</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Weekly Outreach</div>
+          <div class="metric-value green">100+</div>
+          <div class="metric-sub">at 5% reply rate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card claude" style="padding: 0; overflow: hidden;">
+      <div style="padding:12px 14px; border-bottom:1px solid var(--border); background:var(--surface2);">
+        <div class="card-label" style="margin-bottom:0;">12-Week Aggressive Roadmap — Weeks 1–4 shown</div>
+      </div>
+      <div class="roadmap-grid">
+        <div class="rw-week">
+          <div class="rw-week-num">WK 01</div>
+          <div class="rw-week-label">Foundation</div>
+        </div>
+        <div class="rw-content">
+          <div class="rw-goal">Goal: Blueprint live, ICP locked, operation scaffolded</div>
+          <div class="rw-items">
+            <div class="rw-item highlight"><div class="rw-check"></div><div class="rw-item-text">Blueprint built · outputs/blueprint.md ✅ Done this session</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">GTM.md complete — ICP, positioning, objection map</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">PIPELINE_TRACKER.md + CONTENT_TRACKER.md populated</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">CRM set up: Outreach / Blueprint sent / Meeting / Proposal / Closed</div></div>
+          </div>
+        </div>
+
+        <div class="rw-week">
+          <div class="rw-week-num">WK 02</div>
+          <div class="rw-week-label">Launch</div>
+        </div>
+        <div class="rw-content">
+          <div class="rw-goal">Goal: First outreach sent + first LinkedIn post + lead magnet page live</div>
+          <div class="rw-items">
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">25 cold emails sent (Blueprint offer, not demo ask)</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">25 LinkedIn connections sent (Blueprint in DM 1)</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">5 LinkedIn posts published (4 lead magnet + 1 founder)</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">convrt.io/blueprint live — email opt-in working</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">Comment automation active: BLUEPRINT trigger → DM</div></div>
+          </div>
+        </div>
+
+        <div class="rw-week">
+          <div class="rw-week-num">WK 03</div>
+          <div class="rw-week-label">Volume</div>
+        </div>
+        <div class="rw-content">
+          <div class="rw-goal">Goal: Full cadence, first replies, content momentum</div>
+          <div class="rw-items">
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">50+ cold emails/week · 50+ LinkedIn touches/week</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">First replies — qualify or disqualify each in PIPELINE_TRACKER.md</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">Reddit post #1 — manual workflow, no pitch, UTM link to Blueprint page</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">If open rate &lt;30%: test 3 new subject lines · If reply rate &lt;2%: rewrite Email 1</div></div>
+          </div>
+        </div>
+
+        <div class="rw-week">
+          <div class="rw-week-num">WK 04</div>
+          <div class="rw-week-label">First Meetings</div>
+        </div>
+        <div class="rw-content">
+          <div class="rw-goal">Goal: Discovery calls booked, first Blueprint opt-ins from content</div>
+          <div class="rw-items">
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">3+ discovery calls booked — qualify: PLG + $1M–$8M ARR + active growth team</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">Discovery call framework built — 5 questions, 30 min, next step defined</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">Website: first email opt-ins — track source (LinkedIn DM vs. organic)</div></div>
+            <div class="rw-item"><div class="rw-check"></div><div class="rw-item-text">Outreach at 200 total touches</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="roadmap-more">
+        ↓ Weeks 5–12 generated in ROADMAP.md — pipeline density, content traction, first close, 90-day review
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: FILES -->
+  <div class="section-divider">
+    <div class="section-label">Session End · Files Written</div>
+  </div>
+
+  <div class="feed">
+    <div class="card claude">
+      <div class="card-label">Operation Scaffolded</div>
+      <div class="file-log">
+        <div class="file-log-title">Files created this session</div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">CLAUDE.md</span><span class="file-desc">session continuity rules</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">GTM.md</span><span class="file-desc">ICP · positioning · objection map</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">PIPELINE_TRACKER.md</span><span class="file-desc">pipeline stages · metrics · weekly diagnosis</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">CONTENT_TRACKER.md</span><span class="file-desc">post performance · opt-in rate · email list</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">ROADMAP.md</span><span class="file-desc">12-week plan · revenue math · week-by-week</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">PROJECT_STATE.md</span><span class="file-desc">current position · decisions made</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">outputs/blueprint.md</span><span class="file-desc">Trial-to-Paid Blueprint v1 · core asset</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">outputs/sequences/cold-email.md</span><span class="file-desc">4-email sequence · Blueprint method</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">outputs/sequences/linkedin.md</span><span class="file-desc">connection + 3 DMs · Blueprint in DM 1</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">outputs/content/linkedin-plan.md</span><span class="file-desc">7 formats · weekly cadence · comment triggers</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">outputs/website/lead-magnet-page.md</span><span class="file-desc">headline · opt-in · 4-email nurture sequence</span></div>
+        <div class="file-item"><div class="file-dot"></div><span class="file-path">outputs/proposals/proposal-template.md</span><span class="file-desc">outcome-first · follow-up schedule</span></div>
+      </div>
+      <p style="margin-top:12px; font-size:0.82rem; color:var(--text2);">Next session: open this folder in Claude Code. Session continuity reads these files automatically — no recap needed. Start with: <span class="mono accent">What do you want to work on this week?</span></p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.card, .session-start').forEach(el => observer.observe(el));
+</script>
