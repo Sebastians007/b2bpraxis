@@ -82,6 +82,108 @@ All outreach campaigns run through this loop. Pipeline math tracks what's happen
 
 ---
 
+## STARTER PACK (required before any outreach or content)
+
+Three documents must exist in GTM.md before any prospect is contacted or any content is published. No exceptions — vague targeting and weak offers can't be fixed by better copy.
+
+1. **ICP Mapping Report** — industry, company size, revenue range, buyer title, user title, trigger event (what just happened in their world that makes them ready to buy), buying signals (what you can see from the outside that indicates a good fit)
+2. **Audience Deep Research** — where they gather (communities, publications, events), what they read, exact language they use to describe their own problems (not your language — theirs), their top 3 objections to buying something like this
+3. **Offer Memo** — the specific outcome you deliver, the timeframe, the price, what's included, what's not, the one-line "from → to" statement that a prospect can immediately understand
+
+---
+
+## INBOUND & NURTURE
+
+Outbound (ES loop) fills the pipeline now. Inbound fills it at lower cost over time. Run both. The 3-layer trust system builds inbound authority while outbound runs.
+
+### Layer 1 — Generate
+
+**Gateway posts:** Publish a value-first LinkedIn post offering a free resource (guide, template, case study). Prospect comments → resource auto-delivered via DM → email captured → enters nurture. Post structure: hook (the result the resource produces) → what's inside → "Comment [WORD] to get it."
+
+**Outbound:** ES loop handles this. Layer 1 outbound = 30 connection requests + 10 cold emails per day max. Value-first framing only — never open with a pitch. Send a guide, a relevant insight, or a case study. No pitch in the first touch.
+
+**Build order:** outbound first → email nurture content second → LinkedIn posting third → retargeting ads last. Never start with ads. Ads amplify what's already working — they don't create it.
+
+### Layer 2 — Nurture
+
+**Lead scoring:**
+| Stage | Signals | Action |
+|-------|---------|--------|
+| Cold | Downloaded a resource, connected on LinkedIn, no further engagement | Enter 90-day email sequence |
+| Warm | Opened 3+ emails, clicked 2+ links, revisited the site | Increase touch frequency, send higher-value asset |
+| Hot | Visited pricing or case study pages repeatedly, replied to email, engaged with multiple assets | Flag for direct outreach — move to Layer 3 |
+
+**Email nurture sequence rules:**
+- 90+ days minimum. Most B2B buyers take 3-6 months to be ready.
+- Every email links to a resource (guide, video, case study) — never directly to a sales page
+- Rotate content type: insight → case study → white paper → video snippet → tool/template. Never the same format twice in a row.
+- Tone matches the locked voice in GTM.md throughout — the sequence should feel like the same person talking, not a drip campaign
+
+**Never-discard rule:** A lead who doesn't convert now is not a dead lead. Archive them at 90 days with no engagement, revisit at 6 months. Circumstances change. The ones who come back pre-sold close faster and cheaper than cold leads.
+
+**Retargeting:** run presence-building ads to your warm list — case studies, client outcomes, short video clips. Not sales pitches. Rotate assets every 2 weeks. The goal is to stay visible, not to convert directly from an ad.
+
+### Layer 3 — Convert
+
+Hot leads auto-flagged in PIPELINE_TRACKER.md → direct outreach with a specific, relevant angle (reference what they engaged with) → assessment page → value bridge → book call → pre-call nurture → discovery call. See PRE-CALL CONVERSION section.
+
+---
+
+## PRE-CALL CONVERSION
+
+The gap between "interested" and "showed up to the call" is where most pipeline leaks. These three steps close it.
+
+### Assessment Page
+Before booking a call, hot prospects complete a short assessment (2-3 minutes). Structure: simple qualifying questions first → specific pain questions last (most painful question second-to-last, not last — end on a forward-looking note). The arc builds from easy to uncomfortable to hopeful. Two purposes: (1) qualifies the lead so both sides know if it's worth a call, (2) primes the prospect by surfacing their own pain before they talk to you. Never send a booking link cold — the assessment filters and prepares.
+
+### Value Bridge
+Immediately after booking: send a short explainer (3-minute video or 1-page PDF) that explains your process, not your credentials. "Here's exactly how we approach [their problem]." If they don't understand the process, they don't show up. The value bridge turns a calendar hold into a committed meeting.
+
+### Pre-Call Nurture Sequence
+- **Never book calls more than 7 days out** — the further out the call, the lower the show rate
+- Send confirmation + value bridge within 1 hour of booking
+- Day 3 before call: relevant case study or short insight — something specific to their industry
+- Day of call (morning): "Looking forward to speaking at [time]. We'll cover [specific thing]." One sentence. No fluff.
+- Target: 80%+ show rate. If below 70%, the value bridge or booking process needs work — diagnose before blaming no-shows
+
+---
+
+## CLIENT SUCCESS & REFERRALS
+
+### Client Success
+Getting the client is step one. Keeping them and expanding is where the margin lives.
+
+- **Week 1:** proactive check-in — not "how's it going" but "here's what I noticed in the first week and here's what we're doing about it." Sets the tone that you're ahead of problems, not behind them.
+- **Monthly:** send a short progress summary tied to the metrics defined at project start. No metrics defined at start = no way to demonstrate value. Always lock success metrics before work begins.
+- **Expansion signals:** client mentions a problem adjacent to your scope → flag it immediately. "That's actually something we also help with — want me to put together a quick scope?" Expansion revenue closes at 3x the rate of new business.
+- **30-day post-project check-in:** after delivery, follow up to see how results are performing. Most freelancers disappear at invoice. This one email generates more referrals than any other touchpoint.
+
+### Referral System
+Referrals are the highest-converting lead source in B2B. They close faster, negotiate less, and trust more. Most companies get them by accident. This makes it systematic.
+
+**Ask timing:** within 48 hours of a client saying something positive — mid-project when momentum is high, not at project end when they're thinking about invoices. Strike when the emotion is fresh.
+
+**The ask:**
+```
+"Glad this is going well. Most of our best clients come through referrals.
+Is there anyone in your network dealing with [exact problem you solve]?
+Here's a line you could forward if someone comes to mind:
+
+'[Company] helped us [specific result]. Happy to intro if it's relevant.'"
+```
+
+Always give them the words. Forwarding a pre-written line takes 10 seconds. Writing their own referral from scratch takes effort they won't spend.
+
+**Partner network:** identify 5-10 companies that serve your ICP but don't compete. Build actual relationships — refer to them first, unprompted. Reciprocity is real. Once the relationship is warm, make it explicit: "I think there's a good referral flow here — want to be intentional about sending each other leads?"
+
+**Track in PIPELINE_TRACKER.md:**
+```
+| Referral Source | Type | Last Referral | Total Referred |
+|----------------|------|---------------|----------------|
+```
+
+---
+
 ## CHANGE MANAGEMENT
 
 When refining ICP, messaging, or sequences based on what's working:
