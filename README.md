@@ -2,6 +2,19 @@
 
 A B2B company growth system for Claude. Guides the full revenue operation from ICP definition to repeatable pipeline — sessions are persistent, state lives in files.
 
+```mermaid
+flowchart LR
+    A([Lock ICP]) --> B([Lock Voice])
+    B --> C([Build Sequences])
+    C --> D{ES Loop\n10–30/day}
+    D -->|reply rate &gt; 5%\n210+ attempts| E([Scale])
+    D -->|reply rate &lt; 2%\n0 calls| F([Pivot Angle])
+    F --> D
+    E --> G([Pipeline\nTracker])
+    G -->|open rate · reply rate\nmeeting rate · close rate| D
+    G --> H([Revenue])
+```
+
 ## Install
 
 ```bash
