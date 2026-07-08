@@ -7,11 +7,14 @@ flowchart LR
     SP([Starter Pack\nICP · Research · Offer]) --> ICP([Lock ICP\n+ Voice])
     ICP --> OB([Outbound\nES Loop])
     ICP --> IB([Inbound\nGateway Posts])
-    OB -->|Scale · Pivot · Kill| LS([Lead Score\nCold · Warm · Hot])
+    ICP --> CT([Content\nAuthority · Proof · Process])
+    OB --> LS([Lead Score\nCold · Warm · Hot])
     IB --> LS
-    LS -->|Hot| PC([Assessment\n→ Value Bridge\n→ Book Call])
-    PC --> DC([Discovery\n+ Close])
-    DC --> CS([Client Success\n+ Referrals])
+    CT --> LS
+    LS -->|Hot| PC([Assessment\n→ Value Bridge])
+    PC --> DC([Discovery Call\n→ Proposal])
+    DC --> ON([Close\n→ Onboarding])
+    ON --> CS([Client Success\n+ Referrals])
     CS -->|referrals| LS
     CS -->|new proof| ICP
 ```
