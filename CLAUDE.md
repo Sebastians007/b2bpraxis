@@ -148,6 +148,200 @@ Immediately after booking: send a short explainer (3-minute video or 1-page PDF)
 
 ---
 
+## DISCOVERY CALL
+
+A discovery call is a diagnostic conversation, not a pitch. Show up as a consultant who is figuring out whether to take on the project — not a vendor hoping to win the business. That posture changes the entire dynamic.
+
+### Before the call
+- Research the company: industry, size, recent news, obvious problems they're facing
+- Know your minimum engagement size before getting on — if the budget is below that, say so early
+- Have a notes doc ready — capture their exact words, not your paraphrase of them
+
+### Call structure (30–45 min)
+
+**Opening (2 min):**
+"Before I tell you anything about how we work, I want to understand your situation. Mind if I ask a few questions first?" — They always say yes. You've just positioned yourself as the expert in the room.
+
+**Discovery (15–20 min):**
+1. "What are you trying to achieve in the next 90 days?"
+2. "What have you already tried? What worked, what didn't?"
+3. "What does success look like — how would you measure it?"
+4. "What's the cost of not solving this?" — the most important question. Makes the value tangible before price ever comes up.
+5. "Is there a hard deadline driving this?"
+6. "Who else is involved in making this decision?"
+
+**Budget (always ask it):**
+"What budget has been set aside for this? I ask so I can tell you honestly whether what you're describing is achievable within that range." — Ask it every time. The salespeople who skip this waste entire proposals on clients who can't afford them.
+
+**Diagnosis (5–10 min):**
+Only after you've fully understood their situation — share your read. Not "here's what we'll do" — "here's what we see."
+"Based on what you've described, the core issue sounds like [X]. The way we'd approach that is [Y]."
+Reference their exact words back to them — it signals you actually listened.
+
+**Next steps (5 min):**
+"We'll send a proposal by [specific date]. It'll cover scope, timeline, and investment." Always a specific date. Never "we'll be in touch."
+
+### What not to do
+- Don't pitch before you've finished listening
+- Don't give away the solution — diagnose, don't prescribe
+- Don't leave without a specific next step and a date
+- If the fit is clearly wrong, say so: "Honestly, I don't think we're the right fit for this — here's what you actually need." Doing this once builds more trust than 10 polished pitches.
+
+---
+
+## PROPOSALS
+
+A proposal sent cold has <5% acceptance. A proposal after a good discovery call has >40%. The proposal doesn't close the deal — the discovery call does. The proposal makes it official.
+
+### Structure
+
+```
+# Proposal: [Project Name]
+Prepared for: [Client, Company]
+Date: [Date]   |   Valid until: [Date + 14 days]
+
+---
+
+## The Situation
+[2-3 sentences restating their problem in their words — shows you listened]
+
+## The Outcome
+[What success looks like, using the metrics they gave you on the call]
+
+## Our Approach
+[3-5 steps — enough to show thinking, not enough to do it without you]
+
+## What's Included
+- [Deliverable 1]
+- [Deliverable 2]
+- [Timeline]
+- [Rounds of revisions / calls included]
+
+## What's Not Included
+[Scope boundaries — prevents creep and surprises]
+
+## Investment
+$[X,XXX]
+Payment: [50% upfront, 50% on delivery — or milestone schedule]
+
+## Testimonial
+"[Most relevant quote to this client's situation]" — [Name, Title, Company]
+
+## Next Steps
+To move forward: [reply / sign here / send deposit]. We can start [specific date].
+```
+
+### Rules
+- Send within 24 hours of the call — momentum dies fast
+- One page if possible, two max — long proposals get skimmed
+- Validity date on every proposal — creates urgency, prevents indefinite ghosting
+- Day 3 follow-up if no response: "Wanted to make sure this landed — any questions?"
+- Day 7: one line — "Still happy to move forward if the timing works."
+- Day 14: soft close — "The start date we were holding is filling up — let us know either way."
+- Never discount price without reducing scope. A discount with no scope change signals the original price was inflated.
+
+Save to: `outputs/proposals/[client-name]-[date].md`
+
+---
+
+## PRICING STRATEGY
+
+### Pricing models
+- **Project-based:** fixed price for a defined scope. Use when the deliverable is clear and bounded.
+- **Retainer:** monthly fee for ongoing access or output. Price on the outcome, not hours. Include a 3-month minimum — month-to-month retainers cancel at the first budget squeeze.
+- **Value-based:** price as a percentage of value created. Use for high-leverage work where the client's upside is measurable and large.
+- **Hourly:** never. It punishes efficiency and caps revenue. If a client insists, translate to a project rate.
+
+### Positioning the price
+Never lead with price. Lead with the outcome and let the price follow from it:
+- Not: "We charge $X for this"
+- Yes: "Our typical engagement for this type of work runs $X–Y depending on scope. Our last client in your situation saw [specific metric] within [timeframe]."
+
+### Three-option anchoring
+Always present three scope options (smaller, right-sized, premium). Most buyers choose the middle. This isn't manipulation — it helps buyers make decisions and ensures clients who want more can access it.
+
+### Negotiation
+- "That's too expensive" → "Compared to what?" Find out if it's the total or the timing. Then: "If this produces [specific result], is the investment still too high?"
+- If genuinely too expensive for their budget: "We could start with [smaller scope] at $Y. That's usually enough for both sides to know if we should continue."
+- Never drop the rate — drop the scope. "I can do [reduced version] for that budget. Here's exactly what that covers."
+
+### Annual retainers
+Offer annual retainers at a 15–20% discount. Annual = guaranteed cash flow on your side; the discount is worth it. Clients on annual retainers almost never churn mid-engagement.
+
+---
+
+## OBJECTION HANDLING
+
+The four objections that stall B2B pipelines — and how to address each without flinching.
+
+### "That's too expensive"
+Find out which of three things it actually means before responding: (1) they didn't understand the value, (2) they're comparing to the wrong benchmark, or (3) they genuinely can't afford it.
+
+**Unpack it:** "Is it the total number, or is it the timing?" — Often it's one, not both. Learn which first.
+
+**Reframe to ROI:** "Help me think about this with you — what would [the outcome] be worth to the business over the next 12 months?"
+
+**Smaller entry:** "If the full engagement feels like a big commitment before we've worked together, we sometimes start with [smaller scope] at $Y. That usually answers the fit question for both sides."
+
+Never drop the rate without dropping scope. It tells the client your original price wasn't real.
+
+### "Not right now"
+Find out if it's real or a brush-off before accepting it.
+
+**Ask what changes it:** "What would need to be different for this to make sense?" — A real answer means it's timing. No answer means it's a soft no.
+
+**Get a date:** "Understood — when should I follow up? Next quarter? After [specific trigger]?" No date = never.
+
+**90-day nurture:** timing objections go into a 90-day follow-up sequence, not the dead pile. Circumstances change. The company that couldn't budget in Q1 often can in Q3.
+
+### "We're evaluating other vendors"
+Good — they're serious about solving the problem. Your job is to be the easiest choice.
+
+**Get on the scorecard:** "What criteria are you using to decide?" — Get them to name it. Then address each criterion specifically in your follow-up.
+
+**Differentiate on process:** what you do is similar to competitors. How you work — communication, accountability, rigor — is usually the real differentiator. Make it visible.
+
+**Follow up with value:** while they're evaluating, send one relevant resource (case study, insight). Shows you're thinking about their problem. Doesn't feel like chasing.
+
+### "I need to get internal buy-in"
+The real decision-maker isn't in the room. Your job is to get in the room.
+
+**Ask to join the conversation:** "Would it be useful if I joined a call to answer questions directly? I can put together a one-pager tailored to their concerns if that would help."
+
+**Give them the words:** send a summary they can forward internally. Include: the problem, the approach, the expected outcome, the investment, one relevant case study. A champion who has a proposal in hand closes buy-in at 3x the rate of one who's explaining a conversation.
+
+---
+
+## CLIENT ONBOARDING (POST-CLOSE)
+
+Most of the client relationship is won or lost in the first two weeks. The gap between signed contract and first deliverable is where client anxiety peaks. Fill it deliberately.
+
+### Within 48 hours of signing
+Send a kickoff email immediately — not after you've planned everything, immediately. It confirms they made the right decision.
+
+Structure:
+- "Excited to get started — here's what happens next"
+- Your first 3 steps with dates
+- What you need from them (access, documents, contacts) — listed specifically, not vaguely
+- The kickoff call invite (scheduled in the same email)
+
+### Kickoff call agenda
+1. Reconfirm the goal in their words — let them say it, not you
+2. Lock success metrics — specific and measurable. No metrics defined = no way to prove value later.
+3. Communication agreement: one channel, check-in cadence, who approves what
+4. First deliverable: specific day, specific output
+5. "Is there anything you're worried about or want to flag?" — ask it. Concerns surfaced early are fixable; concerns surfaced late damage trust.
+
+### First deliverable
+Ship something within 5 business days. It can be an outline, draft, or research summary — not the final output. Early momentum is the most powerful signal that the client made the right choice.
+
+Never disappear for two weeks. Silence in the first two weeks = buyer's remorse.
+
+### Capture everything promised
+In GTM.md, document what was promised in the proposal and discovery call. If any expectations were set verbally that aren't in the proposal, capture them in a kickoff summary sent within 24 hours of the kickoff call. This is your scope protection document.
+
+---
+
 ## CLIENT SUCCESS & REFERRALS
 
 ### Client Success
@@ -181,6 +375,49 @@ Always give them the words. Forwarding a pre-written line takes 10 seconds. Writ
 | Referral Source | Type | Last Referral | Total Referred |
 |----------------|------|---------------|----------------|
 ```
+
+---
+
+## CONTENT STRATEGY
+
+The ES loop fills the pipeline now. Content fills it over time at lower cost. Run both — outbound is the accelerator, content is the compounding asset.
+
+### 3-pillar structure
+Every piece of content fits one pillar. Weekly mix: 2 Authority/Process : 1 Proof.
+
+| Pillar | Purpose | Examples |
+|--------|---------|---------|
+| **Authority** | Demonstrates expertise — what you know | Frameworks, breakdowns, contrarian takes, "why X doesn't work" |
+| **Proof** | Shows results — what you've done | Case studies, before/after stats, client outcomes, recent wins |
+| **Process** | Shows how you work | Behind-the-scenes, methodology breakdowns, project updates |
+
+### Cadence
+- 3 posts per week on LinkedIn minimum
+- Gateway post (resource offer) once per week max — more than that and the feed becomes transactional
+- Batch-write on Mondays: draft the week's posts in one session, schedule them out. One writing session per week beats daily scramble every time.
+
+### Post structure
+- Hook (first line): specific result, provocative claim, or pattern interrupt. The hook decides whether the scroll stops.
+- No "I" as the first word — reads as self-promotional before they've read anything
+- 3–5 punchy lines or a brief structured breakdown — no walls of text
+- End with a question or insight, not a CTA — algorithm favors conversation, not pitches
+- Gateway posts are the exception: these end with "Comment [WORD] to get it"
+
+### What to write about
+Read `GTM.md` Audience Deep Research before planning content. Write about:
+- Problems your ICP describes in their own language — not your language
+- Decisions your ICP makes regularly — help them make better ones
+- Mistakes you see most often in your category
+- Your own process and approach — this is the most differentiated content you can produce
+
+### Content calendar
+Keep a simple `content/CALENDAR.md`:
+```
+| Date | Pillar | Topic | Hook (first line) | Status |
+|------|--------|-------|-------------------|--------|
+| [date] | Authority | [topic] | [first line] | Draft |
+```
+Plan 2 weeks ahead. Never post without a hook written first — the hook is what decides whether the post gets read.
 
 ---
 
