@@ -84,11 +84,47 @@ All outreach campaigns run through this loop. Pipeline math tracks what's happen
 
 ## STARTER PACK (required before any outreach or content)
 
-Three documents must exist in GTM.md before any prospect is contacted or any content is published. No exceptions — vague targeting and weak offers can't be fixed by better copy.
+Five documents must exist in GTM.md before any prospect is contacted or any content is published. No exceptions — vague targeting and weak offers can't be fixed by better copy.
 
-1. **ICP Mapping Report** — industry, company size, revenue range, buyer title, user title, trigger event (what just happened in their world that makes them ready to buy), buying signals (what you can see from the outside that indicates a good fit)
-2. **Audience Deep Research** — where they gather (communities, publications, events), what they read, exact language they use to describe their own problems (not your language — theirs), their top 3 objections to buying something like this
-3. **Offer Memo** — the specific outcome you deliver, the timeframe, the price, what's included, what's not, the one-line "from → to" statement that a prospect can immediately understand
+**PLANNING GATE — print and verify this before any outreach or content begins:**
+```
+STARTER PACK CHECKLIST
+[ ] ICP Mapping Report complete — all 7 dimensions filled (see below)
+[ ] Buyer Committee mapped — champion, economic buyer, technical buyer, end user identified
+[ ] Competitive Intelligence complete — 3 competitors analyzed, your gap documented
+[ ] Audience Deep Research complete
+[ ] Offer Memo complete
+```
+If any item is unchecked, complete it first. Outreach before this checklist is done produces generic messaging that gets ignored.
+
+---
+
+1. **ICP Mapping Report** — lock all 7 dimensions before writing a word of copy:
+   - **Firmographic:** industry, company size (employees), revenue range
+   - **Technographic:** what tools/stack they use today (signals fit and integration opportunity)
+   - **Buyer title:** who signs the check vs who uses the product (often different people)
+   - **Trigger event:** what just happened in their world that makes them ready to buy right now (funding round, new hire, regulation change, competitor move, growth inflection)
+   - **Buying signals:** what you can see from the outside — hiring patterns for RevOps/SDR/VP Sales roles, job postings naming your category, LinkedIn activity, funding announced in last 6 months
+   - **Anti-ICP:** who to explicitly exclude (saves time and protects close rate)
+   - **Problem statement:** "When [trigger situation], [buyer title] struggles to [specific pain], which costs them [measurable consequence]."
+
+2. **Buyer Committee Map** — B2B decisions involve multiple people. Map them before outreach:
+   - **Champion:** the internal advocate who wants this solved and will push for it
+   - **Economic buyer:** who controls the budget and signs off
+   - **Technical buyer:** who evaluates fit with existing stack
+   - **End user:** who actually uses it day-to-day
+   For each: their primary concern, what would make them say yes, what would make them block it. Your champion needs words they can use to sell internally — give them those words.
+
+3. **Competitive Intelligence** — research 3 direct competitors before writing positioning:
+   - Feature set and pricing (screenshot their pricing page)
+   - Top complaints from real users: check Reddit, G2, Trustpilot, LinkedIn comments — categorize as: pricing too high / missing features / poor UX / bad support
+   - What they do well that you must match (table stakes)
+   - The specific gap they leave — this is your differentiator, not what you claim, but what their customers are actually asking for
+   - Displacement criteria: if a prospect currently uses a competitor, they have budget allocated and a live problem — flag them as high-priority targets
+
+4. **Audience Deep Research** — where they gather (communities, publications, events), what they read, exact language they use to describe their own problems (not your language — theirs), their top 3 objections to buying something like this
+
+5. **Offer Memo** — the specific outcome you deliver, the timeframe, the price, what's included, what's not, the one-line "from → to" statement that a prospect can immediately understand
 
 ---
 
